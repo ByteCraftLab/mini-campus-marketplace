@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse All Products - CampusTrade</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .browse-header {
+      padding: 1.5rem 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      background-color: #ffffff;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-filter-controls {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .browse-search {
+      position: relative;
+    }
+
+    .browse-search input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border-radius: 0.75rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .browse-search input:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .browse-search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      font-size: 1.2rem;
+    }
+
+    .categories-filter {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .filter-btn {
+      background-color: #ffffff;
+      color: #374151;
+      border: 1px solid #d1d5db;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background-color: #4f46e5;
+      color: #ffffff;
+      border-color: #4f46e5;
+    }
+
+    .product-results-info {
+      max-width: 1200px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .product-grid-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-bottom: 3rem;
+    }
+
+    .browse-product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .search-filter-controls {
+        grid-template-columns: 2fr 3fr;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="logo">🛍️ CampusTrade</div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="browse.html" class="active">Browse</a>
+        <a href="sell.html">Sell Item</a>
+        <a href="saved.html">Saved</a>
+      </nav>
+      <button class="btn-post">+ Post Ad</button>
+    </div>
+  </header>
+
+  <section class="browse-header">
+    <div class="search-filter-controls">
+      <div class="browse-search">
+        <span class="browse-search-icon">🔍</span>
+        <input type="text" id="browseSearchInput" placeholder="Search textbooks, tech, furniture...">
+      </div>
+      <div class="categories-filter" id="categoryFilterContainer">
+        <button class="filter-btn active" data-category="All">All</button>
+        <button class="filter-btn" data-category="Textbooks">Textbooks</button>
+        <button class="filter-btn" data-category="Electronics">Electronics</button>
+        <button class="filter-btn" data-category="Furniture">Furniture</button>
+        <button class="filter-btn" data-category="Dorm Essentials">Dorm Essentials</button>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-content">
+    <div class="product-results-info">
+      <h2 style="font-size: 1.125rem;">Available Listings</h2>
+      <span class="item-count" id="browseItemCount">0 items found</span>
+    </div>
+
+    <div class="product-grid-container">
+      <div class="browse-product-grid" id="browseProductGrid"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <p>© 2026 Mini Campus Marketplace. Built for students.</p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="browse.js"></script>
+</body>
+</html>
