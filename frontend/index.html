@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini Campus Marketplace</title>
@@ -15,3 +16,75 @@
 
 </body>
 </html>
+=======
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusTrade - Mini Campus Marketplace</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="logo">🛍️ CampusTrade</div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="sell.html">Sell Item</a>
+        <a href="saved.html">Saved</a>
+      </nav>
+      <button class="btn-post">+ Post Ad</button>
+      <button class="menu-toggle" id="menuToggleBtn">☰</button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="sell.html">Sell Item</a>
+      <a href="saved.html">Saved</a>
+      <button class="btn-post" style="display: block; width: 100%;">+ Post Ad</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-container">
+      <h1>Buy & Sell on Campus</h1>
+      <p>Find textbooks, dorm furniture, and tech from fellow students nearby.</p>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search textbooks, chairs, fridges...">
+      </div>
+    </div>
+  </section>
+
+  <main class="main-content">
+    <div class="categories" id="categoryContainer">
+      <button class="category-btn active" data-category="All">All</button>
+      <button class="category-btn" data-category="Textbooks">Textbooks</button>
+      <button class="category-btn" data-category="Electronics">Electronics</button>
+      <button class="category-btn" data-category="Furniture">Furniture</button>
+      <button class="category-btn" data-category="Dorm Essentials">Dorm Essentials</button>
+    </div>
+
+    <div class="section-header">
+      <h2>Recent Listings</h2>
+      <span class="item-count" id="itemCount">0 items found</span>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <p>© 2026 Mini Campus Marketplace. Built for students.</p>
+      <div class="footer-links">
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+        <a href="#safety">Campus Safety</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+>>>>>>> d581ee2 (Create marketplace homepage)

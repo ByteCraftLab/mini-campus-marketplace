@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - CampusTrade</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .detail-container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .detail-image-panel {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 300px;
+    }
+
+    .detail-image-panel img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 0.5rem;
+    }
+
+    .detail-info-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .info-header {
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 1rem;
+    }
+
+    .info-category {
+      color: #4f46e5;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #111827;
+      line-height: 1.2;
+    }
+
+    .info-meta {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-top: 0.5rem;
+    }
+
+    .info-meta strong {
+      color: #374151;
+    }
+
+    .info-price {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #4f46e5;
+    }
+
+    .info-description {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+    }
+
+    .info-description h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #111827;
+    }
+
+    .info-description p {
+      color: #4b5563;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .detail-action-btn {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.125rem;
+    }
+
+    @media (min-width: 768px) {
+      .detail-container {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+      .detail-image-panel {
+        height: 450px;
+        position: sticky;
+        top: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="logo">🛍️ CampusTrade</div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="sell.html">Sell Item</a>
+        <a href="saved.html">Saved</a>
+      </nav>
+      <button class="btn-post">+ Post Ad</button>
+    </div>
+  </header>
+
+  <main class="main-content" id="productDetailWrapper"></main>
+
+  <footer>
+    <div class="footer-container">
+      <p>© 2026 Mini Campus Marketplace. Built for students.</p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="product.js"></script>
+</body>
+</html>
