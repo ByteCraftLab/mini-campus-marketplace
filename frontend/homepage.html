@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MarketDay | Mini Campus Marketplace</title>
+	<meta name="description" content="A simple marketplace for buying and selling essentials around campus.">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<style>
+		:root { --ink: #17231f; --muted: #6a7872; --cream: #f7f5ee; --paper: #fffdf8; --green: #174d3b; --lime: #d8ef72; --orange: #ef8452; --line: #dfe5dc; }
+		* { box-sizing: border-box; }
+		body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; }
+		a { color: inherit; text-decoration: none; }
+		button, input { font: inherit; }
+		.shell { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+		header { background: var(--paper); border-bottom: 1px solid var(--line); }
+		.nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+		.brand { display: flex; align-items: center; gap: 10px; font: 700 1.3rem 'Space Grotesk', sans-serif; letter-spacing: -.04em; }
+		.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: var(--orange); color: white; font-size: 1.1rem; }
+		.nav-links { display: flex; align-items: center; gap: 28px; color: var(--muted); font-size: .9rem; }
+		.nav-links a:first-child { color: var(--ink); font-weight: 700; }
+		.sell-button { border: 0; border-radius: 7px; padding: 11px 17px; background: var(--green); color: white; cursor: pointer; font-weight: 700; }
+		.hero { padding: 70px 0 54px; background: var(--green); color: white; overflow: hidden; }
+		.hero-inner { position: relative; }
+		.hero-inner::after { content: '✦'; position: absolute; right: 5%; top: -20px; color: var(--lime); font-size: 9rem; line-height: 1; opacity: .9; }
+		.eyebrow { margin: 0 0 20px; color: var(--lime); font-size: .76rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+		h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+		h1 { max-width: 680px; margin: 0; font-size: clamp(2.7rem, 6vw, 5rem); line-height: .98; letter-spacing: -.07em; }
+		.hero-copy { max-width: 480px; margin: 24px 0 34px; color: #c8d6ce; font-size: 1.05rem; line-height: 1.65; }
+		.search-wrap { max-width: 690px; position: relative; z-index: 1; display: flex; background: white; border-radius: 7px; padding: 6px; }
+		.search-wrap input { min-width: 0; flex: 1; border: 0; outline: 0; padding: 13px 15px; color: var(--ink); }
+		.search-button { border: 0; border-radius: 5px; padding: 0 22px; background: var(--lime); color: var(--ink); cursor: pointer; font-weight: 700; }
+		main { padding: 56px 0 80px; }
+		.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 24px; }
+		.section-heading h2 { margin: 0; font-size: 1.8rem; letter-spacing: -.05em; }
+		.section-heading p { margin: 0; color: var(--muted); font-size: .9rem; }
+		.category-row { display: flex; gap: 9px; overflow-x: auto; margin-bottom: 30px; padding-bottom: 4px; }
+		.category { border: 1px solid var(--line); border-radius: 999px; padding: 9px 15px; background: transparent; color: var(--muted); white-space: nowrap; cursor: pointer; }
+		.category.active, .category:hover { border-color: var(--green); background: var(--green); color: white; }
+		.product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+		.load-more { display: block; margin: 34px auto 0; border: 1px solid var(--green); border-radius: 7px; padding: 12px 20px; background: transparent; color: var(--green); cursor: pointer; font-weight: 700; }
+		.load-more:hover { background: var(--green); color: white; }
+		.product-card { min-width: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; }
+		.product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(23, 77, 59, .1); }
+		.product-image { width: 100%; aspect-ratio: 1.1; display: grid; place-items: center; background: #e8eee1; font-size: 4rem; }
+		.product-card:nth-child(2) .product-image { background: #f8e3d3; }
+		.product-card:nth-child(3) .product-image { background: #e4e8f3; }
+		.product-card:nth-child(4) .product-image { background: #f2edc9; }
+		.product-info { padding: 17px; }
+		.product-info h3 { margin: 0 0 7px; font-size: 1.03rem; letter-spacing: -.03em; }
+		.product-info p { margin: 0 0 15px; color: var(--muted); font-size: .82rem; }
+		.product-meta { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 13px; }
+		.price { color: var(--green); font-weight: 700; }
+		.location { color: var(--muted); font-size: .74rem; }
+		.empty { grid-column: 1 / -1; padding: 35px; text-align: center; color: var(--muted); }
+		footer { background: #102f26; color: #d6e0db; padding: 28px 0; }
+		.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+		footer p { margin: 0; font-size: .8rem; }
+		.footer-links { display: flex; gap: 20px; color: white; font-size: .8rem; }
+		@media (max-width: 800px) { .product-grid { grid-template-columns: repeat(2, 1fr); } .nav-links { gap: 14px; } .nav-links a { display: none; } }
+		@media (max-width: 520px) { .shell { padding: 0 18px; } .nav { min-height: 66px; } .sell-button { padding: 9px 12px; font-size: .8rem; } .hero { padding: 55px 0 48px; } .hero-inner::after { right: -20px; top: 10px; font-size: 6rem; } h1 { font-size: 2.9rem; } .hero-copy { font-size: .92rem; } .search-wrap { display: block; padding: 7px; } .search-wrap input { width: 100%; padding: 12px 10px; } .search-button { width: 100%; height: 42px; margin-top: 5px; } main { padding: 42px 0 60px; } .section-heading { display: block; } .section-heading p { margin-top: 7px; } .product-grid { gap: 12px; } .product-info { padding: 13px; } .product-image { font-size: 3rem; } .footer-inner { align-items: flex-start; flex-direction: column; } }
+	</style>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+		const { useEffect, useState } = React;
+		const products = [
+			{ name: 'Calculus Textbook', category: 'Books', price: 'GHS 35.00', location: 'Main campus', icon: '📚' },
+			{ name: 'Desk Lamp', category: 'Room & Living', price: 'GHS 25.00', location: 'Hostel block B', icon: '💡' },
+			{ name: 'Wireless Headphones', category: 'Electronics', price: 'GHS 65.00', location: 'North campus', icon: '🎧' },
+			{ name: 'Canvas Backpack', category: 'Fashion', price: 'GHS 40.00', location: 'Student centre', icon: '🎒' },
+			{ name: 'Lab Coat', category: 'Fashion', price: 'GHS 55.00', location: 'Science block', icon: '🥼' },
+			{ name: 'Study Chair', category: 'Room & Living', price: 'GHS 120.00', location: 'Hostel block A', icon: '🪑' },
+			{ name: 'Introduction to Biology', category: 'Books', price: 'GHS 45.00', location: 'West campus', icon: '📖' },
+			{ name: 'USB-C Charger', category: 'Electronics', price: 'GHS 30.00', location: 'Student centre', icon: '🔌' },
+			{ name: 'Scientific Calculator', category: 'Electronics', price: 'GHS 75.00', location: 'Main campus', icon: '🧮' },
+			{ name: 'Reusable Water Bottle', category: 'Room & Living', price: 'GHS 22.00', location: 'East campus', icon: '🧴' },
+			{ name: 'Denim Jacket', category: 'Fashion', price: 'GHS 80.00', location: 'Hostel block C', icon: '🧥' },
+			{ name: 'Academic Writing Guide', category: 'Books', price: 'GHS 28.00', location: 'Library lane', icon: '✍️' },
+			{ name: 'Bluetooth Speaker', category: 'Electronics', price: 'GHS 90.00', location: 'South campus', icon: '🔊' },
+			{ name: 'Jollof Rice Pack', category: 'Food stuffs', price: 'GHS 18.00', location: 'Student centre', icon: '🍛' },
+			{ name: 'Plantain Chips', category: 'Food stuffs', price: 'GHS 8.00', location: 'North campus', icon: '🍌' },
+			{ name: 'Bottled Water', category: 'Food stuffs', price: 'GHS 5.00', location: 'Main campus', icon: '💧' }
+		];
+
+		function App() {
+			const [query, setQuery] = useState('');
+			const [category, setCategory] = useState('All items');
+			const [visibleCount, setVisibleCount] = useState(8);
+			const categories = ['All items', 'Books', 'Electronics', 'Room & Living', 'Fashion', 'Food stuffs'];
+			const filtered = products.filter(product =>
+				(category === 'All items' || product.category === category) &&
+				`${product.name} ${product.category}`.toLowerCase().includes(query.toLowerCase())
+			);
+			const visibleProducts = filtered.slice(0, visibleCount);
+
+			useEffect(() => {
+				setVisibleCount(8);
+			}, [query, category]);
+
+			return <>
+				<header><div className="shell nav">
+					<a className="brand" href="#top"><span className="brand-mark">M</span> MarketDay</a>
+					<nav className="nav-links" aria-label="Main navigation"><a href="#products">Browse</a><a href="#how-it-works">How it works</a><a href="#footer">About</a><button className="sell-button" type="button">+ Sell an item</button></nav>
+				</div></header>
+				<section className="hero" id="top"><div className="shell hero-inner">
+					<p className="eyebrow">The campus marketplace</p><h1>Find good stuff.<br />Keep it local.</h1>
+					<p className="hero-copy">Buy, sell, and discover useful things from people right here on campus.</p>
+					<form className="search-wrap" onSubmit={event => event.preventDefault()}><input aria-label="Search products" value={query} onChange={event => setQuery(event.target.value)} placeholder="Search books, electronics, furniture..." /><button className="search-button" type="submit">Search</button></form>
+				</div></section>
+				<main id="products"><div className="shell"><div className="section-heading"><h2>Fresh on campus</h2><p>{filtered.length} items available</p></div>
+					<div className="category-row" aria-label="Product categories">{categories.map(item => <button className={`category ${category === item ? 'active' : ''}`} key={item} onClick={() => setCategory(item)} type="button">{item}</button>)}</div>
+					<div className="product-grid">{filtered.length ? visibleProducts.map(product => <article className="product-card" key={product.name}><div className="product-image" role="img" aria-label={product.name}>{product.icon}</div><div className="product-info"><h3>{product.name}</h3><p>{product.category}</p><div className="product-meta"><span className="price">{product.price}</span><span className="location">{product.location}</span></div></div></article>) : <p className="empty">No products match your search yet.</p>}</div>
+					{visibleCount < filtered.length && <button className="load-more" type="button" onClick={() => setVisibleCount(count => count + 4)}>Load more listings</button>}
+				</div></main>
+				<footer id="footer"><div className="shell footer-inner"><p>© 2026 MarketDay · Made for campus life.</p><div className="footer-links"><a href="#products">Browse</a><a href="#top">Back to top ↑</a></div></div></footer>
+			</>;
+		}
+		ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+	</script>
+</body>
+</html>
